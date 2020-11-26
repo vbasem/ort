@@ -233,13 +233,10 @@ class NuGetSupport(serviceIndexUrls: List<String> = listOf(DEFAULT_SERVICE_INDEX
                             // TODO: Add support for lock files, see
                             //       https://devblogs.microsoft.com/nuget/enable-repeatable-package-restores-using-a-lock-file/.
 
-                            // Resolve to the lowest applicable version, see
-                            // https://docs.microsoft.com/en-us/nuget/concepts/dependency-resolution#lowest-applicable-version.
+                            // Resolve to the highest existent version that matches the version description as specified
+                            // at https://docs.microsoft.com/en-us/nuget/concepts/package-versioning#version-ranges.
                             val version = dependency.range.trim { it.isWhitespace() || it in VERSION_RANGE_CHARS }
-                                .split(",").first().trim()
-
-                            // TODO: Add support resolving to the highest version for floating versions, see
-                            //       https://docs.microsoft.com/en-us/nuget/concepts/dependency-resolution#floating-versions.
+                                .split(",").last().trim()
 
                             getIdentifier(dependency.id, version)
                         },
