@@ -322,8 +322,7 @@ Currently, the following package managers are supported:
 * [Conan](https://conan.io/) (C / C++, *experimental* as the VCS locations often times do not contain the actual source
   code, see [issue #2037](https://github.com/oss-review-toolkit/ort/issues/2037))
 * [dep](https://golang.github.io/dep/) (Go)
-* [DotNet](https://docs.microsoft.com/en-us/dotnet/core/tools/) (.NET, with currently some
-  [limitations](https://github.com/oss-review-toolkit/ort/pull/1303#issue-253860146))
+* [DotNet](https://docs.microsoft.com/en-us/dotnet/core/tools/) (.NET)
 * [Glide](https://glide.sh/) (Go)
 * [Godep](https://github.com/tools/godep) (Go)
 * [GoMod](https://github.com/golang/go/wiki/Modules) (Go, *experimental* as only proxy-based source artifacts but no VCS
@@ -331,8 +330,7 @@ Currently, the following package managers are supported:
 * [Gradle](https://gradle.org/) (Java)
 * [Maven](http://maven.apache.org/) (Java)
 * [NPM](https://www.npmjs.com/) (Node.js)
-* [NuGet](https://www.nuget.org/) (.NET, with currently some
-  [limitations](https://github.com/oss-review-toolkit/ort/pull/1303#issue-253860146))
+* [NuGet](https://www.nuget.org/) (.NET)
 * [PIP](https://pip.pypa.io/) (Python)
 * [Pipenv](https://pipenv.readthedocs.io/) (Python)
 * [Pub](https://pub.dev/) (Dart / Flutter)
