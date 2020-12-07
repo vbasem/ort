@@ -44,6 +44,13 @@ internal class NuGetAllPackageData(
         val type: String
     )
 
+    // See https://docs.microsoft.com/en-us/nuget/api/search-autocomplete-service-resource#enumerate-package-versions.
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    class PackageVersions(
+        val totalHits: Int,
+        val data: List<String>
+    )
+
     // See https://docs.microsoft.com/en-us/nuget/api/registration-base-url-resource.
     @JsonIgnoreProperties(ignoreUnknown = true)
     class PackageData(

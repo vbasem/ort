@@ -29,6 +29,9 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 
+import com.vdurmont.semver4j.Requirement
+import com.vdurmont.semver4j.Semver
+
 import java.io.File
 import java.io.IOException
 import java.util.SortedMap
@@ -49,6 +52,7 @@ import org.ossreviewtoolkit.analyzer.PackageManager
 import org.ossreviewtoolkit.analyzer.managers.utils.NuGetAllPackageData.PackageData
 import org.ossreviewtoolkit.analyzer.managers.utils.NuGetAllPackageData.PackageDetails
 import org.ossreviewtoolkit.analyzer.managers.utils.NuGetAllPackageData.PackageSpec
+import org.ossreviewtoolkit.analyzer.managers.utils.NuGetAllPackageData.PackageVersions
 import org.ossreviewtoolkit.analyzer.managers.utils.NuGetAllPackageData.ServiceIndex
 import org.ossreviewtoolkit.downloader.VersionControlSystem
 import org.ossreviewtoolkit.model.Hash
@@ -62,6 +66,7 @@ import org.ossreviewtoolkit.model.RemoteArtifact
 import org.ossreviewtoolkit.model.Scope
 import org.ossreviewtoolkit.model.VcsInfo
 import org.ossreviewtoolkit.model.VcsType
+import org.ossreviewtoolkit.model.config.AnalyzerConfiguration
 import org.ossreviewtoolkit.model.createAndLogIssue
 import org.ossreviewtoolkit.utils.OkHttpClientHelper
 import org.ossreviewtoolkit.utils.await
@@ -72,7 +77,9 @@ import org.ossreviewtoolkit.utils.searchUpwardsForFile
 
 // See https://docs.microsoft.com/en-us/nuget/api/overview.
 private const val DEFAULT_SERVICE_INDEX_URL = "https://api.nuget.org/v3/index.json"
+
 private const val REGISTRATIONS_BASE_URL_TYPE = "RegistrationsBaseUrl/3.6.0"
+private const val SEARCH_AUTOCOMPLETE_SERVICE_TYPE = "SearchAutocompleteService/3.5.0"
 
 private val VERSION_RANGE_CHARS = charArrayOf('[', ']', '(', ')', ',')
 
@@ -122,8 +129,13 @@ class NuGetSupport(serviceIndexUrls: List<String> = listOf(DEFAULT_SERVICE_INDEX
         .flatMap { it.resources }
         .filter { it.type == REGISTRATIONS_BASE_URL_TYPE }
         .map { it.id.removeSuffix("/") }
+    private val searchAutocompleteServices = serviceIndices
+        .flatMap { it.resources }
+        .filter { it.type == SEARCH_AUTOCOMPLETE_SERVICE_TYPE }
+        .map { it.id.removeSuffix("/") }
 
     private val packageMap = mutableMapOf<Identifier, Pair<NuGetAllPackageData, Package>>()
+    private val versionsMap = mutableMapOf<String, List<String>>()
 
     private suspend inline fun <reified T> mapFromUrl(mapper: ObjectMapper, url: String): T {
         val request = Request.Builder()
@@ -142,6 +154,24 @@ class NuGetSupport(serviceIndexUrls: List<String> = listOf(DEFAULT_SERVICE_INDEX
             ?: throw IOException("Failed to get a response body from '$url'.")
 
         return mapper.readValue(body)
+    }
+
+    private fun getAllPackageVersions(name: String): List<String> {
+        // Note: The package name in the URL is case-sensitive and must be lower-case!
+        val lowerId = name.toLowerCase()
+
+        val versions = searchAutocompleteServices.asSequence().mapNotNull { autocompleteUrl ->
+            try {
+                val versionsUrl = "$autocompleteUrl?id=$lowerId"
+                runBlocking { mapFromUrl<PackageVersions>(JSON_MAPPER, versionsUrl) }
+            } catch (e: IOException) {
+                log.debug { "Failed to retrieve versions for package '$lowerId' from $autocompleteUrl." }
+                null
+            }
+        }.firstOrNull()
+            ?: throw IOException("Failed to retrieve versions for package '$lowerId' from any of $registrationsBaseUrls.")
+
+        return versions.data
     }
 
     private fun getAllPackageData(id: Identifier): NuGetAllPackageData {
@@ -230,13 +260,30 @@ class NuGetSupport(serviceIndexUrls: List<String> = listOf(DEFAULT_SERVICE_INDEX
 
                     buildDependencyTree(
                         referredDependencies.map { dependency ->
+                            // The Semver library cannot handles spaces in ranges.
+                            val dependencyRangeNoSpaces = dependency.range.replace(" ", "")
+
                             // TODO: Add support for lock files, see
                             //       https://devblogs.microsoft.com/nuget/enable-repeatable-package-restores-using-a-lock-file/.
+                            val version = runCatching {
+                                // First try to parse the range as a single version to avoid resolving versions.
+                                Semver(dependencyRangeNoSpaces, Semver.SemverType.LOOSE).toString()
+                            }.getOrElse {
+                                // Try to parse the range as described at
+                                // https://docs.microsoft.com/en-us/nuget/concepts/package-versioning#version-ranges.
+                                val requirement = Requirement.buildIvy(dependencyRangeNoSpaces)
+                                val versions = versionsMap.getOrPut(dependency.id) {
+                                    getAllPackageVersions(dependency.id)
+                                }
 
-                            // Resolve to the highest existent version that matches the version description as specified
-                            // at https://docs.microsoft.com/en-us/nuget/concepts/package-versioning#version-ranges.
-                            val version = dependency.range.trim { it.isWhitespace() || it in VERSION_RANGE_CHARS }
-                                .split(",").last().trim()
+                                // TODO: Add support for floating versions, see
+                                //       https://docs.microsoft.com/en-us/nuget/concepts/dependency-resolution#floating-versions.
+
+                                // Use the lowest version that satisfies the requirement, also see
+                                // https://docs.microsoft.com/en-us/nuget/concepts/dependency-resolution#lowest-applicable-version.
+                                val satisfyingVersions = versions.filter { requirement.isSatisfiedBy(it) }
+                                satisfyingVersions.firstOrNull()
+                            } ?: throw IOException("Unable to find a matching version for $dependencyRangeNoSpaces.")
 
                             getIdentifier(dependency.id, version)
                         },
