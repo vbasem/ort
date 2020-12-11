@@ -22,6 +22,8 @@ package org.ossreviewtoolkit.utils.storage
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.core.test.TestCase
 import io.kotest.core.test.TestResult
+import io.kotest.matchers.file.exist
+import io.kotest.matchers.should
 import io.kotest.matchers.shouldBe
 
 import java.io.File
@@ -61,7 +63,7 @@ class FileArchiverTest : StringSpec() {
 
     private fun File.assertFileContent(path: String) {
         val file = resolve(path)
-        file.isFile shouldBe true
+        file should exist()
         file.readText() shouldBe path
     }
 
