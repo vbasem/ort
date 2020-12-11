@@ -19,7 +19,7 @@
 
 package org.ossreviewtoolkit.utils
 
-import org.springframework.util.AntPathMatcher
+import org.codehaus.plexus.util.SelectorUtils
 
 /**
  * A class to determine whether a path is matched by any of the given globs.
@@ -30,22 +30,18 @@ class FileMatcher(
      *
      * [1]: https://docs.oracle.com/javase/tutorial/essential/io/fileOps.html#glob
      */
-    val patterns: List<String>,
+    private val patterns: List<String>,
 
     /**
      * Toggle the case-sensitivity of the matching.
      */
-    ignoreCase: Boolean = false
+    private val ignoreCase: Boolean = false
 ) {
     constructor(vararg patterns: String, ignoreCase: Boolean = false) : this(patterns.asList(), ignoreCase)
-
-    private val matcher = AntPathMatcher().apply {
-        setCaseSensitive(!ignoreCase)
-    }
 
     /**
      * Return true if and only if the given [path] is matched by any of the file globs passed to the
      * constructor. The [path] must use '/' as separators, if it contains any.
      */
-    fun matches(path: String): Boolean = patterns.any { pattern -> matcher.match(pattern, path) }
+    fun matches(path: String): Boolean = patterns.any { pattern -> SelectorUtils.match(pattern, path, !ignoreCase) }
 }

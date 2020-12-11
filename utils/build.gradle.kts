@@ -47,6 +47,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-scripting-jsr223")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinxCoroutinesVersion")
     implementation("org.springframework:spring-core:$springCoreVersion")
+    implementation("org.codehaus.plexus:plexus-utils:3.2.1")
     implementation("org.tukaani:xz:$xzVersion")
 
     testImplementation("io.mockk:mockk:$mockkVersion")
