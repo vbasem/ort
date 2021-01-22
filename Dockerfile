@@ -62,7 +62,7 @@ ENV \
     # SDK versions.
     ANDROID_SDK_VERSION=6858069 \
     # Scanner versions.
-    SCANCODE_VERSION=3.2.1rc2 \
+    SCANCODE_VERSION=3.2.3 \
     # Installation directories.
     ANDROID_HOME=/opt/android-sdk \
     FLUTTER_HOME=/opt/flutter \
