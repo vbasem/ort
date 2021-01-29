@@ -22,6 +22,7 @@ package org.ossreviewtoolkit.analyzer
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.WordSpec
 import io.kotest.matchers.collections.containExactly
+import io.kotest.matchers.collections.haveSize
 import io.kotest.matchers.collections.shouldContainExactlyInAnyOrder
 import io.kotest.matchers.should
 import io.kotest.matchers.shouldBe
@@ -33,7 +34,7 @@ import org.ossreviewtoolkit.model.VcsInfo
 import org.ossreviewtoolkit.model.VcsType
 
 class PackageManagerTest : WordSpec({
-    val projectDir = File("src/funTest/assets/projects/synthetic/all-managers").absoluteFile
+    val projectDir = File("src/funTest/assets/projects/synthetic").absoluteFile
 
     "findManagedFiles" should {
         "find all managed files" {
@@ -85,7 +86,7 @@ class PackageManagerTest : WordSpec({
                 manager.managerName
             }
 
-            managedFilesByName["Gradle"] should containExactly(projectDir.resolve("build.gradle"))
+            managedFilesByName["Gradle"].orEmpty() should haveSize(10)
             managedFilesByName["PIP"] should containExactly(projectDir.resolve("setup.py"))
             managedFilesByName["SBT"] should containExactly(projectDir.resolve("build.sbt"))
         }
