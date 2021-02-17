@@ -21,13 +21,16 @@ package org.ossreviewtoolkit.analyzer.managers
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
+import org.ossreviewtoolkit.downloader.VersionControlSystem
 
 import java.io.File
 
 import org.ossreviewtoolkit.utils.Os
+import org.ossreviewtoolkit.utils.normalizeVcsUrl
 import org.ossreviewtoolkit.utils.test.DEFAULT_ANALYZER_CONFIGURATION
 import org.ossreviewtoolkit.utils.test.DEFAULT_REPOSITORY_CONFIGURATION
 import org.ossreviewtoolkit.utils.test.USER_DIR
+import org.ossreviewtoolkit.utils.test.patchExpectedResult
 
 class StackFunTest : StringSpec({
     "Dependencies should be resolved correctly for quickcheck-state-machine" {
@@ -40,6 +43,30 @@ class StackFunTest : StringSpec({
             "external/quickcheck-state-machine-expected-output.yml"
         }
         val expectedResult = projectsDir.resolve(expectedOutput).readText()
+        val actualResult = result.toYaml()
+
+        actualResult shouldBe expectedResult
+    }
+
+    "Dependencies should be resolved correctly for yesodweb-simple" {
+        val projectDir = projectsDir.resolve("synthetic/stack-yesodweb-simple")
+        val definitionFile = projectDir.resolve("stack.yaml")
+        val vcsDir = VersionControlSystem.forDirectory(projectDir)!!
+        val vcsUrl = vcsDir.getRemoteUrl()
+        val vcsRevision = vcsDir.getRevision()
+
+        val result = createStack().resolveSingleProject(definitionFile)
+
+        val expectedOutputFile = if (Os.isWindows) {
+            "synthetic/stack-yesodweb-simple-expected-output.yml"
+        } else {
+            "synthetic/stack-yesodweb-simple-expected-output.yml"
+        }
+        val expectedResult = patchExpectedResult(
+            projectsDir.resolve(expectedOutputFile),
+            revision = vcsRevision,
+            urlProcessed = normalizeVcsUrl(vcsUrl)
+        )
         val actualResult = result.toYaml()
 
         actualResult shouldBe expectedResult
