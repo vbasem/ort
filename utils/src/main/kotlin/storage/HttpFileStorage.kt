@@ -104,7 +104,7 @@ class HttpFileStorage(
                 .url(urlForPath(path))
                 .build()
 
-            log.debug { "Writing file to storage: ${request.url}" }
+            println("Writing file to storage: ${request.url}")
 
             return OkHttpClientHelper.execute(request).use { response ->
                 if (response.code != HttpURLConnection.HTTP_CREATED && response.code != HttpURLConnection.HTTP_OK) {

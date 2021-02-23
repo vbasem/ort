@@ -135,7 +135,7 @@ abstract class ScanResultsStorage {
         /**
          * Create a [PostgresStorage] based on the [config] passed in.
          */
-        private fun createPostgresStorage(config: PostgresStorageConfiguration): ScanResultsStorage {
+        fun createPostgresStorage(config: PostgresStorageConfiguration): PostgresStorage {
             require(config.url.isNotBlank()) {
                 "URL for PostgreSQL storage is missing."
             }

@@ -39,6 +39,7 @@ import kotlin.time.measureTimedValue
 import org.ossreviewtoolkit.model.Failure
 import org.ossreviewtoolkit.model.Identifier
 import org.ossreviewtoolkit.model.Package
+import org.ossreviewtoolkit.model.Provenance
 import org.ossreviewtoolkit.model.Result
 import org.ossreviewtoolkit.model.ScanResult
 import org.ossreviewtoolkit.model.ScanResultContainer
@@ -218,6 +219,39 @@ class PostgresStorage(
                 else -> throw e
             }
         }
+    }
+
+    fun getEntries(): Set<Pair<Identifier, Provenance>> {
+        val query = """
+                  SELECT
+                    identifier,
+                    scan_result->'provenance'
+                  FROM $schema.$table
+                    scan_results
+        """.trimIndent()
+
+        val result = mutableSetOf<Pair<Identifier, Provenance>>()
+
+        try {
+            executePreparedStatement(query) {
+                fetchSize = 100000
+                val resultSet = executeQuery()
+
+
+                resultSet.use {
+                    while (it.next()) {
+                        val id = Identifier(it.getString(1))
+                        val provenance = jsonMapper.readValue<Provenance>(it.getString(2).unescapeNull())
+                        result += id to provenance
+                    }
+                }
+                result
+            }
+        } catch (e: Exception) {
+            log.error { e.message }
+        }
+
+        return result
     }
 
     override fun readFromStorage(pkg: Package, scannerCriteria: ScannerCriteria): Result<ScanResultContainer> {
