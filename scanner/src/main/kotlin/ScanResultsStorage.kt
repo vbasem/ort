@@ -136,7 +136,7 @@ abstract class ScanResultsStorage {
         /**
          * Create a [PostgresStorage] based on the [config] passed in.
          */
-        private fun createPostgresStorage(config: PostgresStorageConfiguration): ScanResultsStorage {
+        fun createPostgresStorage(config: PostgresStorageConfiguration): PostgresStorage {
             val dataSource = DatabaseUtils.createHikariDataSource(
                 config = config,
                 applicationNameSuffix = TOOL_NAME,

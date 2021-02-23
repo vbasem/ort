@@ -20,6 +20,7 @@
 package org.ossreviewtoolkit.scanner.storages
 
 import com.fasterxml.jackson.core.JsonProcessingException
+import com.fasterxml.jackson.module.kotlin.readValue
 
 import java.sql.SQLException
 
@@ -35,15 +36,18 @@ import org.jetbrains.exposed.sql.SchemaUtils.createMissingTablesAndColumns
 import org.jetbrains.exposed.sql.SchemaUtils.withDataBaseLock
 import org.jetbrains.exposed.sql.Transaction
 import org.jetbrains.exposed.sql.and
+import org.jetbrains.exposed.sql.transactions.TransactionManager
 import org.jetbrains.exposed.sql.transactions.experimental.suspendedTransactionAsync
 import org.jetbrains.exposed.sql.transactions.transaction
 
 import org.ossreviewtoolkit.model.Failure
 import org.ossreviewtoolkit.model.Identifier
 import org.ossreviewtoolkit.model.Package
+import org.ossreviewtoolkit.model.Provenance
 import org.ossreviewtoolkit.model.Result
 import org.ossreviewtoolkit.model.ScanResult
 import org.ossreviewtoolkit.model.Success
+import org.ossreviewtoolkit.model.jsonMapper
 import org.ossreviewtoolkit.model.utils.DatabaseUtils.checkDatabaseEncoding
 import org.ossreviewtoolkit.model.utils.DatabaseUtils.tableExists
 import org.ossreviewtoolkit.model.utils.arrayParam
@@ -56,6 +60,7 @@ import org.ossreviewtoolkit.scanner.storages.utils.ScanResults
 import org.ossreviewtoolkit.utils.collectMessagesAsString
 import org.ossreviewtoolkit.utils.log
 import org.ossreviewtoolkit.utils.showStackTrace
+import java.sql.Statement
 
 private val TABLE_NAME = ScanResults.tableName
 
@@ -178,6 +183,25 @@ class PostgresStorage(
             }
         }
     }
+
+    fun getEntries(): Set<Provenance> =
+        transaction {
+            val conn = TransactionManager.current().connection
+            val statement = conn.prepareStatement("SELECT scan_result->'provenance' FROM oso.scan_results", arrayOf())
+            statement.fetchSize = 50000
+            val r = statement.executeQuery()
+
+            fun String.unescapeNull() = replace("\\\\u0000", "\\u0000")
+
+            val result = mutableSetOf<Provenance>()
+            while(r.next()) {
+                val provenance = jsonMapper.readValue<Provenance>(r.getString(1).unescapeNull())
+                result += provenance
+            }
+
+            result
+        }
+
 
     override fun readInternal(
         packages: List<Package>,
