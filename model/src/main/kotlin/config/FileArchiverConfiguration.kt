@@ -33,14 +33,14 @@ data class FileArchiverConfiguration(
     /**
      * Configuration of the [FileStorage] used for archiving the files.
      */
-    val storage: FileStorageConfiguration
+    val fileStorage: FileStorageConfiguration
 )
 
 /**
  * Create a [FileArchiver] based on this configuration.
  */
 fun FileArchiverConfiguration?.createFileArchiver(): FileArchiver {
-    val storage = this?.storage?.createFileStorage() ?: LocalFileStorage(FileArchiver.DEFAULT_ARCHIVE_DIR)
+    val storage = this?.fileStorage?.createFileStorage() ?: LocalFileStorage(FileArchiver.DEFAULT_ARCHIVE_DIR)
     val patterns = LicenseFilenamePatterns.getInstance().allLicenseFilenames
 
     return FileArchiver(patterns, storage)
