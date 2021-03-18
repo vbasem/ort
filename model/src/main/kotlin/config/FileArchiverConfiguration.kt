@@ -21,7 +21,10 @@ package org.ossreviewtoolkit.model.config
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 
+import org.ossreviewtoolkit.model.utils.DatabaseUtils
 import org.ossreviewtoolkit.model.utils.FileArchiver
+import org.ossreviewtoolkit.model.utils.FileArchiverFileStorage
+import org.ossreviewtoolkit.model.utils.PostgresFileArchiverStorage
 import org.ossreviewtoolkit.utils.storage.FileStorage
 import org.ossreviewtoolkit.utils.storage.LocalFileStorage
 
@@ -33,14 +36,35 @@ data class FileArchiverConfiguration(
     /**
      * Configuration of the [FileStorage] used for archiving the files.
      */
-    val fileStorage: FileStorageConfiguration
-)
+    val fileStorage: FileStorageConfiguration? = null,
 
+    /**
+     * Configuration of the [FileStorage] used for archiving the files.
+     */
+    val postgresStorage: PostgresStorageConfiguration? = null
+) {
+    init {
+        require((fileStorage == null) xor (postgresStorage == null)) {
+            "Either a file storage or a Postgres storage must be provided, but not neither or both."
+        }
+    }
+}
 /**
  * Create a [FileArchiver] based on this configuration.
  */
 fun FileArchiverConfiguration?.createFileArchiver(): FileArchiver {
-    val storage = this?.fileStorage?.createFileStorage() ?: LocalFileStorage(FileArchiver.DEFAULT_ARCHIVE_DIR)
+    val storage = when {
+        this == null -> FileArchiverFileStorage(LocalFileStorage(FileArchiver.DEFAULT_ARCHIVE_DIR))
+        fileStorage != null -> FileArchiverFileStorage(fileStorage.createFileStorage())
+        else -> {
+            val dataSource = DatabaseUtils.createHikariDataSource(
+                config = postgresStorage!!,
+                applicationNameSuffix = "file-archiver"
+            )
+            PostgresFileArchiverStorage(dataSource)
+        }
+    }
+
     val patterns = LicenseFilenamePatterns.getInstance().allLicenseFilenames
 
     return FileArchiver(patterns, storage)
