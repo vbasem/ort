@@ -34,11 +34,21 @@ val sw360ClientVersion: String by project
 plugins {
     // Apply core plugins.
     application
+
+    // Apply third-party plugins.
+    id("com.palantir.graal")
 }
 
 application {
     applicationName = "ort"
     mainClassName = "org.ossreviewtoolkit.OrtMainKt"
+}
+
+graal {
+    graalVersion("21.0.0.2")
+    javaVersion("11")
+    mainClass("org.ossreviewtoolkit.OrtMainKt")
+    outputName("outputname")
 }
 
 tasks.named<CreateStartScripts>("startScripts") {
