@@ -132,7 +132,7 @@ interface VulnerableCodeService {
      */
     @Serializable
     data class PackagesWrapper(
-        val purls: List<String>
+        val purls: Collection<String>
     )
 
     /**
