@@ -149,4 +149,3 @@ dependencies {
 }
 
 configurations["funTestImplementation"].extendsFrom(configurations["testImplementation"])
-configurations["funTestRuntime"].extendsFrom(configurations["testRuntime"])

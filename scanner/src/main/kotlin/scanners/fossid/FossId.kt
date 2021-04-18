@@ -217,7 +217,7 @@ class FossId(
             results
         }
 
-        log.info { "Scan has been performed. Total time was ${duration.inSeconds}s." }
+        log.info { "Scan has been performed. Total time was ${duration.inWholeSeconds}s." }
 
         return results
     }
