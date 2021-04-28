@@ -69,6 +69,7 @@ class PackageManagerTest : WordSpec({
             managedFilesByName["SpdxDocumentFile"] should containExactly(projectDir.resolve("project.spdx.yml"))
             managedFilesByName["Stack"] should containExactly(projectDir.resolve("stack.yaml"))
             managedFilesByName["Yarn"] should containExactly(projectDir.resolve("package.json"))
+            managedFilesByName["CocoaPods"] should containExactly(projectDir.resolve("Podfile.lock"))
         }
 
         "find only files for active package managers" {

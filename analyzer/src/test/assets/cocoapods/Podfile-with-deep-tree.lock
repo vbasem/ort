@@ -1,0 +1,165 @@
+PODS:
+  - Alamofire (5.2.2)
+  - base64url (1.1.0)
+  - CryptoSwift (1.3.1)
+  - DeviceKit (3.2.0)
+  - IQKeyboardManagerSwift (6.5.6)
+  - JGProgressHUD (2.1)
+  - LicensesViewController (0.9.0)
+  - MaterialComponents/AnimationTiming (113.1.0)
+  - MaterialComponents/Availability (113.1.0)
+  - MaterialComponents/Buttons (113.1.0):
+    - MaterialComponents/Elevation
+    - MaterialComponents/Ink
+    - MaterialComponents/private/Math
+    - MaterialComponents/Ripple
+    - MaterialComponents/ShadowElevations
+    - MaterialComponents/ShadowLayer
+    - MaterialComponents/ShapeLibrary
+    - MaterialComponents/Shapes
+    - MaterialComponents/Typography
+    - MDFInternationalization
+    - MDFTextAccessibility
+  - MaterialComponents/Elevation (113.1.0):
+    - MaterialComponents/Availability
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+  - MaterialComponents/Ink (113.1.0):
+    - MaterialComponents/Availability
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+  - MaterialComponents/Palettes (113.1.0)
+  - MaterialComponents/private/Application (113.1.0)
+  - MaterialComponents/private/Color (113.1.0):
+    - MaterialComponents/Availability
+  - MaterialComponents/private/Math (113.1.0)
+  - MaterialComponents/Ripple (113.1.0):
+    - MaterialComponents/AnimationTiming
+    - MaterialComponents/Availability
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+  - MaterialComponents/ShadowElevations (113.1.0)
+  - MaterialComponents/ShadowLayer (113.1.0):
+    - MaterialComponents/ShadowElevations
+  - MaterialComponents/ShapeLibrary (113.1.0):
+    - MaterialComponents/private/Math
+    - MaterialComponents/Shapes
+  - MaterialComponents/Shapes (113.1.0):
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+    - MaterialComponents/ShadowLayer
+  - MaterialComponents/TextFields (113.1.0):
+    - MaterialComponents/AnimationTiming
+    - MaterialComponents/Buttons
+    - MaterialComponents/Elevation
+    - MaterialComponents/Palettes
+    - MaterialComponents/private/Math
+    - MaterialComponents/Typography
+    - MDFInternationalization
+  - MaterialComponents/Typography (113.1.0):
+    - MaterialComponents/private/Application
+    - MaterialComponents/private/Math
+    - MDFTextAccessibility
+  - MDFInternationalization (2.0.0)
+  - MDFTextAccessibility (2.0.0)
+  - Mocker (2.2.0)
+  - PhoneNumberKit (3.3.0):
+    - PhoneNumberKit/PhoneNumberKitCore (= 3.3.0)
+    - PhoneNumberKit/UIKit (= 3.3.0)
+  - PhoneNumberKit/PhoneNumberKitCore (3.3.0)
+  - PhoneNumberKit/UIKit (3.3.0):
+    - PhoneNumberKit/PhoneNumberKitCore
+  - Realm (5.4.3):
+    - Realm/Headers (= 5.4.3)
+  - Realm/Headers (5.4.3)
+  - RealmSwift (5.4.3):
+    - Realm (= 5.4.3)
+  - RxAppState (1.6.0):
+    - RxCocoa (~> 5.0)
+    - RxSwift (~> 5.0)
+  - RxCocoa (5.1.1):
+    - RxRelay (~> 5)
+    - RxSwift (~> 5)
+  - RxRelay (5.1.1):
+    - RxSwift (~> 5)
+  - RxSwift (5.1.1)
+  - SimpleCheckbox (2.1.0)
+  - SwiftBase32 (0.8.0)
+  - SwiftGen (6.2.1)
+  - TTTAttributedLabel (2.0.0)
+  - Validator (3.2.1)
+
+DEPENDENCIES:
+  - Alamofire (~> 5.2)
+  - base64url
+  - CryptoSwift (~> 1.0)
+  - DeviceKit (~> 3)
+  - IQKeyboardManagerSwift
+  - JGProgressHUD
+  - LicensesViewController (~> 0.9.0)
+  - MaterialComponents/TextFields
+  - Mocker (~> 2.2.0)
+  - PhoneNumberKit (~> 3.3)
+  - RealmSwift
+  - RxAppState
+  - RxSwift
+  - SimpleCheckbox
+  - SwiftBase32
+  - SwiftGen (~> 6.0)
+  - TTTAttributedLabel
+  - Validator
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Alamofire
+    - base64url
+    - CryptoSwift
+    - DeviceKit
+    - IQKeyboardManagerSwift
+    - JGProgressHUD
+    - LicensesViewController
+    - MaterialComponents
+    - MDFInternationalization
+    - MDFTextAccessibility
+    - Mocker
+    - PhoneNumberKit
+    - Realm
+    - RealmSwift
+    - RxAppState
+    - RxCocoa
+    - RxRelay
+    - RxSwift
+    - SimpleCheckbox
+    - SwiftBase32
+    - SwiftGen
+    - TTTAttributedLabel
+    - Validator
+
+SPEC CHECKSUMS:
+  Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
+  base64url: 92e81bb256f2070359a34fc93a7a7d4b9a9d689f
+  CryptoSwift: f12f037f6d0fcd6d48c96db0071b653de64e6c4d
+  DeviceKit: d081659419cce07c0b5239dbc9fb39ed7413c7fe
+  IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
+  JGProgressHUD: aa403e9a5b45cae98903c4600cccdd98c0c3ec90
+  LicensesViewController: 6487b7721aa19d81d90f2ede98b44177f74bcf1f
+  MaterialComponents: 2dd68a6e240ec31c37a4559f176b7bcfe31ef92c
+  MDFInternationalization: 010097556d6b09d2c4ea38e0820ea6d37be6a314
+  MDFTextAccessibility: 85c09a1bd9c321f494348e632a25063bcda35a53
+  Mocker: d0ceb340eddd5c28539a691ce67d068674cef9a0
+  PhoneNumberKit: edd7d55c9bcf5b00cb7675c045b24c698a43c874
+  Realm: e3d5fcc50fd79ddf87a2d86301f6edbf57531f84
+  RealmSwift: db608068eccc54bce47928e8118bde13c120c307
+  RxAppState: b633d7370970ecb80081912ea08a7bf3eb644b4e
+  RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
+  RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
+  RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
+  SimpleCheckbox: ddcd433ab8c3a8f57300bebda13151a8f302c7f9
+  SwiftBase32: 723fd05e2fce776f2b98f26fe423bd20fa80e411
+  SwiftGen: 62e69d127507be1538d4263e137b2290cd6ab272
+  TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
+  Validator: 80a6f567220c962dfd2d9928ae98a8c1d164f6f4
+
+PODFILE CHECKSUM: eb94579ea18a16c4e125c2cf9b3ea178a72d198f
+
+COCOAPODS: 1.10.1

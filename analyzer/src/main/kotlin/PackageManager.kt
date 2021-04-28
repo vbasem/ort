@@ -79,7 +79,8 @@ abstract class PackageManager(
             "src/test/resources",
             // Ignore virtual environments in Python.
             "lib/python2.*/dist-packages",
-            "lib/python3.*/site-packages"
+            "lib/python3.*/site-packages",
+            "Pods"
         )
 
         private val IGNORED_DIRECTORY_MATCHERS = (VCS_DIRECTORIES + PACKAGE_MANAGER_DIRECTORIES).map {
