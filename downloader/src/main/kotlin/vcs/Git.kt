@@ -239,5 +239,6 @@ class Git : VersionControlSystem(), CommandLineTool {
         workingTree.runGit("submodule", "update", "--init", "--recursive")
     }
 
-    private fun WorkingTree.runGit(vararg args: String) = run(*args, workingDir = workingDir)
+    private fun WorkingTree.runGit(vararg args: String) =
+        run(*args, workingDir = workingDir, environment = GIT_LONG_PATHS_ENVIRONMENT)
 }
