@@ -34,15 +34,6 @@ import org.ossreviewtoolkit.model.VcsInfo
 import org.ossreviewtoolkit.model.VcsType
 import org.ossreviewtoolkit.utils.log
 
-/**
- * The map of environment variables to set for enabling long paths (> 260 chars) in Git working trees on Windows.
- */
-val GIT_LONG_PATHS_ENVIRONMENT = mapOf(
-    "GIT_CONFIG_COUNT" to "1",
-    "GIT_CONFIG_KEY_0" to "core.longpaths",
-    "GIT_CONFIG_VALUE_0" to "true",
-)
-
 private fun findGitOrSubmoduleDir(workingDir: File): Repository {
     // First try to open an existing working tree exactly at the given directory. This also works for submodules which
     // since Git 1.7.8 do not have their own ".git" directory anymore in favor of a ".git" file.
