@@ -168,49 +168,47 @@ class CocoaPods(
 
     private fun lookupPodspec(id: Identifier, workingDir: File): PodSpec {
         val namespaceOrName = id.namespace.ifEmpty { id.name }
-        podSpecCache[namespaceOrName]?.let {
-            return it
-        } ?: run {
-            val pathResult = ProcessCapture(command(workingDir),
-                "spec", "which", namespaceOrName, "--version=${id.version}", "--allow-root", "--regex",
-                workingDir = workingDir
+        podSpecCache[namespaceOrName]?.let { return it }
+
+        val pathResult = ProcessCapture(command(workingDir),
+            "spec", "which", namespaceOrName, "--version=${id.version}", "--allow-root", "--regex",
+            workingDir = workingDir
+        )
+
+        if (pathResult.isError) {
+            val issue = createAndLogIssue(
+                managerName,
+                message = pathResult.stdout.trim(),
+                severity = Severity.ERROR
             )
+            issues.add(issue)
 
-            if (pathResult.isError) {
-                val issue = createAndLogIssue(
-                    managerName,
-                    message = pathResult.stdout.trim(),
-                    severity = Severity.ERROR
-                )
-                issues.add(issue)
-
-                return PodSpec(
-                    id.namespace,
-                    id.name,
-                    id.version,
-                    "",
-                    "",
-                    "",
-                    VcsInfo.EMPTY,
-                    RemoteArtifact.EMPTY,
-                    setOf()
-                )
-            }
-
-            val spec = run(
-                "ipc", "spec", pathResult.stdout.trim(), "--allow-root",
-                workingDir = workingDir
-            ).stdout
-
-            var podSpecs = PodSpec.createFromJson(spec)
-            if (id.namespace.isNotEmpty()) { // Filter the subSpecs to find the matching pair
-                podSpecs = podSpecs.filter { it.identifier.name == id.name }
-            }
-
-            val updatedPodSpec = podSpecs.first()
-            podSpecCache[namespaceOrName] = updatedPodSpec
-            return updatedPodSpec
+            return PodSpec(
+                id.namespace,
+                id.name,
+                id.version,
+                "",
+                "",
+                "",
+                VcsInfo.EMPTY,
+                RemoteArtifact.EMPTY,
+                setOf()
+            )
         }
+
+        val spec = run(
+            "ipc", "spec", pathResult.stdout.trim(), "--allow-root",
+            workingDir = workingDir
+        ).stdout
+
+        var podSpecs = PodSpec.createFromJson(spec)
+        if (id.namespace.isNotEmpty()) { // Filter the subSpecs to find the matching pair
+            podSpecs = podSpecs.filter { it.identifier.name == id.name }
+        }
+
+        val updatedPodSpec = podSpecs.first()
+        podSpecCache[namespaceOrName] = updatedPodSpec
+        return updatedPodSpec
     }
 }
 
