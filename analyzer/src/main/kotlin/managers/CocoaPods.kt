@@ -134,7 +134,7 @@ class CocoaPods(
         podfileLock.dependencies = podfileLock.dependencies.map { it.lookupVersion(podfileLock.pods) }.toSet()
 
         val allPodSpecs = podfileLock.pods.map { reference ->
-            lookupPodspec(reference, definitionFile.parentFile).let { podSpec ->
+            lookupPodspec(reference.id, definitionFile.parentFile).let { podSpec ->
                 Package(
                     id = reference.id,
                     authors = sortedSetOf(),
@@ -166,13 +166,13 @@ class CocoaPods(
         )
     }
 
-    private fun lookupPodspec(packageReference: PackageReference, workingDir: File): PodSpec {
-        val namespaceOrName = packageReference.id.namespace.ifEmpty { packageReference.id.name }
+    private fun lookupPodspec(id: Identifier, workingDir: File): PodSpec {
+        val namespaceOrName = id.namespace.ifEmpty { id.name }
         podSpecCache[namespaceOrName]?.let {
             return it
         } ?: run {
             val pathResult = ProcessCapture(command(workingDir),
-                "spec", "which", namespaceOrName, "--version=${packageReference.id.version}", "--allow-root", "--regex",
+                "spec", "which", namespaceOrName, "--version=${id.version}", "--allow-root", "--regex",
                 workingDir = workingDir
             )
 
@@ -185,9 +185,9 @@ class CocoaPods(
                 issues.add(issue)
 
                 return PodSpec(
-                    packageReference.id.namespace,
-                    packageReference.id.name,
-                    packageReference.id.version,
+                    id.namespace,
+                    id.name,
+                    id.version,
                     "",
                     "",
                     "",
@@ -203,8 +203,8 @@ class CocoaPods(
             ).stdout
 
             var podSpecs = PodSpec.createFromJson(spec)
-            if (packageReference.id.namespace.isNotEmpty()) { // Filter the subSpecs to find the matching pair
-                podSpecs = podSpecs.filter { it.identifier.name == packageReference.id.name }
+            if (id.namespace.isNotEmpty()) { // Filter the subSpecs to find the matching pair
+                podSpecs = podSpecs.filter { it.identifier.name == id.name }
             }
 
             val updatedPodSpec = podSpecs.first()
