@@ -102,12 +102,12 @@ class CocoaPods(
     override fun resolveDependencies(definitionFile: File): List<ProjectAnalyzerResult> {
         val workingDir = definitionFile.parentFile
         val projectInfo = getProjectInfoFromVcs(workingDir)
-        val packages = parseCocoapodsDependencies(definitionFile)
-        val scope = Scope("dependencies", dependencies = packages.second)
+        val scope = Scope("dependencies", dependencies = getPackageRefs(definitionFile))
+        val packages = scope.collectDependencies().map { getPackage(it, workingDir) }
 
         return listOf(
             ProjectAnalyzerResult(
-                packages = packages.first,
+                packages = packages.toSortedSet(),
                 project = Project(
                     id = Identifier(
                         type = managerName,
@@ -128,29 +128,20 @@ class CocoaPods(
         )
     }
 
-    private fun parseCocoapodsDependencies(definitionFile: File):
-            Pair<SortedSet<Package>, SortedSet<PackageReference>> {
-        val podfileLock = PodfileLock.createFromYaml(definitionFile.readText())
-        podfileLock.dependencies = podfileLock.dependencies.map { it.lookupVersion(podfileLock.pods) }.toSet()
-
-        val allPodSpecs = podfileLock.pods.map { reference ->
-            lookupPodspec(reference.id, definitionFile.parentFile).let { podSpec ->
-                Package(
-                    id = reference.id,
-                    authors = sortedSetOf(),
-                    declaredLicenses = listOf(podSpec.declaredLicense).toSortedSet(),
-                    description = podSpec.description,
-                    homepageUrl = podSpec.homepageUrl,
-                    binaryArtifact = podSpec.remoteArtifact,
-                    sourceArtifact = RemoteArtifact.EMPTY,
-                    vcs = podSpec.vcs,
-                    vcsProcessed = processPackageVcs(podSpec.vcs, podSpec.homepageUrl)
-                )
-            }
-        }.toSortedSet()
-
-        return Pair(allPodSpecs, podfileLock.dependencies.toSortedSet())
-    }
+    private fun getPackage(id: Identifier, workingDir: File): Package =
+        lookupPodspec(id, workingDir).let { podSpec ->
+            Package(
+                id = id,
+                authors = sortedSetOf(),
+                declaredLicenses = listOf(podSpec.declaredLicense).toSortedSet(),
+                description = podSpec.description,
+                homepageUrl = podSpec.homepageUrl,
+                binaryArtifact = podSpec.remoteArtifact,
+                sourceArtifact = RemoteArtifact.EMPTY,
+                vcs = podSpec.vcs,
+                vcsProcessed = processPackageVcs(podSpec.vcs, podSpec.homepageUrl)
+            )
+        }
 
     private fun getProjectInfoFromVcs(workingDir: File): CocoapodsProjectInfo {
         val workingTree = VersionControlSystem.forDirectory(workingDir)
@@ -317,103 +308,43 @@ data class PodSubSpec(
     }
 }
 
-data class PodfileLock(
-    var dependencies: Set<PackageReference>,
-    val pods: List<PackageReference>
-) {
-    companion object Factory {
-        fun createFromYaml(spec: String): PodfileLock {
-            val yaml = yamlMapper.readTree(spec)
-            val pods = yaml["PODS"]
-                .asIterable()
-                .toPackageReferences()
-                .updateVersions()
-            val dependencies = yaml["DEPENDENCIES"]
-                .asIterable()
-                .toPackageReferences()
-                .updateVersions(pods)
-                .mapNotNull { dependency ->
-                    pods
-                        .findLast { it.id.namespace == dependency.id.namespace && it.id.name == dependency.id.name }
-                        ?.let { podWithVersion ->
-                            dependency.merge(podWithVersion)
-                        }
-                }
-                .toSet()
-
-            return PodfileLock(dependencies, pods)
-        }
-    }
-}
-
-private fun PackageReference.lookupVersion(references: List<PackageReference>): PackageReference {
-    val referencePackage = references.find { it.id.name == id.name && it.id.namespace == id.namespace }
-    val mergedPackage = merge(referencePackage!!)
-    return PackageReference(
-        mergedPackage.id,
-        dependencies = mergedPackage.dependencies.map { it.lookupVersion(references) }.toSortedSet()
-    )
-}
-
-private fun PackageReference.merge(other: PackageReference): PackageReference {
-    require(id.name == other.id.name && id.namespace == other.id.namespace) {
-        "Cannot merge references for different packages."
-    }
-
-    return PackageReference(
-        Identifier(
-            id.type,
-            id.namespace,
-            id.name,
-            id.version.takeUnless { it.isEmpty() } ?: other.id.version
-        ),
-        dependencies = dependencies.takeUnless { it.isEmpty() } ?: other.dependencies
-    )
-}
-
-private fun List<PackageReference>.updateVersions(references: List<PackageReference>? = null): List<PackageReference> {
-    return map { reference ->
-        val updatedDependencies = reference.dependencies.toList().updateVersions(references ?: this).toSortedSet()
-        return@map PackageReference(reference.id, dependencies = updatedDependencies)
-    }
-}
-
-private fun Iterable<JsonNode>.toPackageReferences(): List<PackageReference> = map { it.toPackageReference() }
-
-private fun JsonNode.toPackageReference(): PackageReference {
-    return if (this is ObjectNode) {
-        val fieldName = fieldNames().asSequence().first()
-        val dependencies = this[fieldName].mapNotNull { it.toPackageReference() }.toSortedSet()
-        fieldName.toPackageReference(dependencies)
-    } else {
-        textValue().toPackageReference()
-    }
-}
-
-private fun String.toPackageReference(dependencies: SortedSet<PackageReference> = sortedSetOf()): PackageReference {
-    // Transform: AppCenter/Distribute (= 3.1.1)
-    // into: name=Distribute, namespace=AppCenter, version=(= 3.1.1)
-    val nameAndVersion = split(" (")
-    val names = nameAndVersion.first().split("/")
-    val rawVersion = "(${nameAndVersion.last()}"
-    var namespace: String? = null
-    val versionRegex = "\\((\\S+)\\)".toRegex()
-    val version = versionRegex.find(rawVersion)?.groups?.last()?.value
-
-    var name = names.last()
-    if (names.count() >= 2) {
-        namespace = names.first()
-        name = names.subList(1, names.size).joinToString("/")
-    }
-
-    val identifier = Identifier("Pod", "", packageName(namespace, name), version.orEmpty())
-
-    return PackageReference(identifier, dependencies = dependencies)
-}
-
 private fun packageName(namespace: String?, name: String?): String =
     if (namespace.isNullOrBlank()) {
         name.orEmpty()
     } else {
         "${namespace.orEmpty()}/${name.orEmpty()}"
     }
+
+private val REGEX = "([\\S]+)\\s+(.*)".toRegex()
+
+private fun getPackageRefs(podfileLock: File): SortedSet<PackageReference> {
+    val versionForName = mutableMapOf<String, String>()
+    val dependenciesForName = mutableMapOf<String, MutableSet<String>>()
+    val root = yamlMapper.readTree(podfileLock)
+
+    root.get("PODS").asIterable().forEach { node ->
+        val entry = when {
+            node is ObjectNode -> node.fieldNames().asSequence().first()
+            else -> node.textValue()
+        }
+
+        val (name, version) = REGEX.find(entry)!!.groups.let {
+            it[1]!!.value to it[2]!!.value.removeSurrounding("(", ")")
+        }
+        versionForName[name] = version
+
+        val dependencies = node[entry]?.map { it.textValue().substringBefore(" ") }.orEmpty()
+        dependenciesForName.getOrPut(name) { mutableSetOf() } += dependencies
+    }
+
+    fun getPackageRef(name: String): PackageReference =
+        PackageReference(
+            id = Identifier("Pod", "", name, versionForName.getValue(name)),
+            dependencies = dependenciesForName.getValue(name).mapTo(sortedSetOf()) { getPackageRef(it) }
+        )
+
+    return root.get("DEPENDENCIES").mapTo(sortedSetOf()) { node ->
+        val name = node.textValue().substringBefore(" ")
+        getPackageRef(name)
+    }
+}
