@@ -1,6 +1,6 @@
 ---
 project:
-  id: "CocoaPods:oss-review-toolkit:ort:<REPLACE_REVISION>"
+  id: "CocoaPods::oss-review-toolkit/ort:<REPLACE_REVISION>"
   definition_file_path: "analyzer/src/funTest/assets/projects/synthetic/cocoapods/dep-tree/Podfile.lock"
   declared_licenses: []
   declared_licenses_processed: {}
@@ -24,95 +24,95 @@ project:
     - id: "Pod::IQKeyboardManagerSwift:3.3.7"
     - id: "Pod::JGProgressHUD:2.2"
     - id: "Pod::LicensesViewController:0.9.0"
+    - id: "Pod::MaterialComponents/TextFields:124.2.0"
+      dependencies:
+      - id: "Pod::MDFInternationalization:3.0.0"
+      - id: "Pod::MaterialComponents/AnimationTiming:124.2.0"
+      - id: "Pod::MaterialComponents/Buttons:124.2.0"
+        dependencies:
+        - id: "Pod::MDFInternationalization:3.0.0"
+        - id: "Pod::MDFTextAccessibility:2.0.1"
+        - id: "Pod::MaterialComponents/Elevation:124.2.0"
+          dependencies:
+          - id: "Pod::MaterialComponents/Availability:124.2.0"
+          - id: "Pod::MaterialComponents/private/Color:124.2.0"
+            dependencies:
+            - id: "Pod::MaterialComponents/Availability:124.2.0"
+          - id: "Pod::MaterialComponents/private/Math:124.2.0"
+        - id: "Pod::MaterialComponents/Ink:124.2.0"
+          dependencies:
+          - id: "Pod::MaterialComponents/Availability:124.2.0"
+          - id: "Pod::MaterialComponents/private/Color:124.2.0"
+            dependencies:
+            - id: "Pod::MaterialComponents/Availability:124.2.0"
+          - id: "Pod::MaterialComponents/private/Math:124.2.0"
+        - id: "Pod::MaterialComponents/Ripple:124.2.0"
+          dependencies:
+          - id: "Pod::MaterialComponents/AnimationTiming:124.2.0"
+          - id: "Pod::MaterialComponents/Availability:124.2.0"
+          - id: "Pod::MaterialComponents/private/Color:124.2.0"
+            dependencies:
+            - id: "Pod::MaterialComponents/Availability:124.2.0"
+          - id: "Pod::MaterialComponents/private/Math:124.2.0"
+        - id: "Pod::MaterialComponents/Shadow:124.2.0"
+          dependencies:
+          - id: "Pod::MaterialComponents/Availability:124.2.0"
+        - id: "Pod::MaterialComponents/ShadowElevations:124.2.0"
+        - id: "Pod::MaterialComponents/ShadowLayer:124.2.0"
+          dependencies:
+          - id: "Pod::MaterialComponents/ShadowElevations:124.2.0"
+        - id: "Pod::MaterialComponents/ShapeLibrary:124.2.0"
+          dependencies:
+          - id: "Pod::MaterialComponents/Shapes:124.2.0"
+            dependencies:
+            - id: "Pod::MaterialComponents/ShadowLayer:124.2.0"
+              dependencies:
+              - id: "Pod::MaterialComponents/ShadowElevations:124.2.0"
+            - id: "Pod::MaterialComponents/private/Color:124.2.0"
+              dependencies:
+              - id: "Pod::MaterialComponents/Availability:124.2.0"
+            - id: "Pod::MaterialComponents/private/Math:124.2.0"
+          - id: "Pod::MaterialComponents/private/Math:124.2.0"
+        - id: "Pod::MaterialComponents/Shapes:124.2.0"
+          dependencies:
+          - id: "Pod::MaterialComponents/ShadowLayer:124.2.0"
+            dependencies:
+            - id: "Pod::MaterialComponents/ShadowElevations:124.2.0"
+          - id: "Pod::MaterialComponents/private/Color:124.2.0"
+            dependencies:
+            - id: "Pod::MaterialComponents/Availability:124.2.0"
+          - id: "Pod::MaterialComponents/private/Math:124.2.0"
+        - id: "Pod::MaterialComponents/Typography:124.2.0"
+          dependencies:
+          - id: "Pod::MDFTextAccessibility:2.0.1"
+          - id: "Pod::MaterialComponents/private/Application:124.2.0"
+          - id: "Pod::MaterialComponents/private/Math:124.2.0"
+        - id: "Pod::MaterialComponents/private/Math:124.2.0"
+      - id: "Pod::MaterialComponents/Elevation:124.2.0"
+        dependencies:
+        - id: "Pod::MaterialComponents/Availability:124.2.0"
+        - id: "Pod::MaterialComponents/private/Color:124.2.0"
+          dependencies:
+          - id: "Pod::MaterialComponents/Availability:124.2.0"
+        - id: "Pod::MaterialComponents/private/Math:124.2.0"
+      - id: "Pod::MaterialComponents/Palettes:124.2.0"
+      - id: "Pod::MaterialComponents/Typography:124.2.0"
+        dependencies:
+        - id: "Pod::MDFTextAccessibility:2.0.1"
+        - id: "Pod::MaterialComponents/private/Application:124.2.0"
+        - id: "Pod::MaterialComponents/private/Math:124.2.0"
+      - id: "Pod::MaterialComponents/private/Math:124.2.0"
     - id: "Pod::Mocker:2.2.0"
     - id: "Pod::PhoneNumberKit:3.3.3"
       dependencies:
-      - id: "Pod:PhoneNumberKit:PhoneNumberKitCore:3.3.3"
-      - id: "Pod:PhoneNumberKit:UIKit:3.3.3"
+      - id: "Pod::PhoneNumberKit/PhoneNumberKitCore:3.3.3"
+      - id: "Pod::PhoneNumberKit/UIKit:3.3.3"
         dependencies:
-        - id: "Pod:PhoneNumberKit:PhoneNumberKitCore:3.3.3"
+        - id: "Pod::PhoneNumberKit/PhoneNumberKitCore:3.3.3"
     - id: "Pod::SimpleCheckbox:2.1.0"
     - id: "Pod::TTTAttributedLabel:2.0.0"
     - id: "Pod::Validator:3.2.1"
     - id: "Pod::base64url:1.1.0"
-    - id: "Pod:MaterialComponents:TextFields:124.2.0"
-      dependencies:
-      - id: "Pod::MDFInternationalization:3.0.0"
-      - id: "Pod:MaterialComponents:AnimationTiming:124.2.0"
-      - id: "Pod:MaterialComponents:Buttons:124.2.0"
-        dependencies:
-        - id: "Pod::MDFInternationalization:3.0.0"
-        - id: "Pod::MDFTextAccessibility:2.0.1"
-        - id: "Pod:MaterialComponents:Elevation:124.2.0"
-          dependencies:
-          - id: "Pod:MaterialComponents:Availability:124.2.0"
-          - id: "Pod:MaterialComponents:private/Color:124.2.0"
-            dependencies:
-            - id: "Pod:MaterialComponents:Availability:124.2.0"
-          - id: "Pod:MaterialComponents:private/Math:124.2.0"
-        - id: "Pod:MaterialComponents:Ink:124.2.0"
-          dependencies:
-          - id: "Pod:MaterialComponents:Availability:124.2.0"
-          - id: "Pod:MaterialComponents:private/Color:124.2.0"
-            dependencies:
-            - id: "Pod:MaterialComponents:Availability:124.2.0"
-          - id: "Pod:MaterialComponents:private/Math:124.2.0"
-        - id: "Pod:MaterialComponents:Ripple:124.2.0"
-          dependencies:
-          - id: "Pod:MaterialComponents:AnimationTiming:124.2.0"
-          - id: "Pod:MaterialComponents:Availability:124.2.0"
-          - id: "Pod:MaterialComponents:private/Color:124.2.0"
-            dependencies:
-            - id: "Pod:MaterialComponents:Availability:124.2.0"
-          - id: "Pod:MaterialComponents:private/Math:124.2.0"
-        - id: "Pod:MaterialComponents:Shadow:124.2.0"
-          dependencies:
-          - id: "Pod:MaterialComponents:Availability:124.2.0"
-        - id: "Pod:MaterialComponents:ShadowElevations:124.2.0"
-        - id: "Pod:MaterialComponents:ShadowLayer:124.2.0"
-          dependencies:
-          - id: "Pod:MaterialComponents:ShadowElevations:124.2.0"
-        - id: "Pod:MaterialComponents:ShapeLibrary:124.2.0"
-          dependencies:
-          - id: "Pod:MaterialComponents:Shapes:124.2.0"
-            dependencies:
-            - id: "Pod:MaterialComponents:ShadowLayer:124.2.0"
-              dependencies:
-              - id: "Pod:MaterialComponents:ShadowElevations:124.2.0"
-            - id: "Pod:MaterialComponents:private/Color:124.2.0"
-              dependencies:
-              - id: "Pod:MaterialComponents:Availability:124.2.0"
-            - id: "Pod:MaterialComponents:private/Math:124.2.0"
-          - id: "Pod:MaterialComponents:private/Math:124.2.0"
-        - id: "Pod:MaterialComponents:Shapes:124.2.0"
-          dependencies:
-          - id: "Pod:MaterialComponents:ShadowLayer:124.2.0"
-            dependencies:
-            - id: "Pod:MaterialComponents:ShadowElevations:124.2.0"
-          - id: "Pod:MaterialComponents:private/Color:124.2.0"
-            dependencies:
-            - id: "Pod:MaterialComponents:Availability:124.2.0"
-          - id: "Pod:MaterialComponents:private/Math:124.2.0"
-        - id: "Pod:MaterialComponents:Typography:124.2.0"
-          dependencies:
-          - id: "Pod::MDFTextAccessibility:2.0.1"
-          - id: "Pod:MaterialComponents:private/Application:124.2.0"
-          - id: "Pod:MaterialComponents:private/Math:124.2.0"
-        - id: "Pod:MaterialComponents:private/Math:124.2.0"
-      - id: "Pod:MaterialComponents:Elevation:124.2.0"
-        dependencies:
-        - id: "Pod:MaterialComponents:Availability:124.2.0"
-        - id: "Pod:MaterialComponents:private/Color:124.2.0"
-          dependencies:
-          - id: "Pod:MaterialComponents:Availability:124.2.0"
-        - id: "Pod:MaterialComponents:private/Math:124.2.0"
-      - id: "Pod:MaterialComponents:Palettes:124.2.0"
-      - id: "Pod:MaterialComponents:Typography:124.2.0"
-        dependencies:
-        - id: "Pod::MDFTextAccessibility:2.0.1"
-        - id: "Pod:MaterialComponents:private/Application:124.2.0"
-        - id: "Pod:MaterialComponents:private/Math:124.2.0"
-      - id: "Pod:MaterialComponents:private/Math:124.2.0"
 packages:
 - id: "Pod::Alamofire:5.4.3"
   purl: "pkg:pod/Alamofire@5.4.3"
@@ -347,6 +347,533 @@ packages:
     url: "https://github.com/google/material-text-accessibility-ios.git"
     revision: "v2.0.1"
     path: ""
+- id: "Pod::MaterialComponents/AnimationTiming:124.2.0"
+  purl: "pkg:pod/MaterialComponents%2FAnimationTiming@124.2.0"
+  declared_licenses:
+  - "Apache 2.0"
+  declared_licenses_processed:
+    spdx_expression: "Apache-2.0"
+    mapped:
+      Apache 2.0: "Apache-2.0"
+  description: "A collection of stand-alone production-ready UI libraries focused\
+    \ on design details."
+  homepage_url: "https://github.com/material-components/material-components-ios"
+  binary_artifact:
+    url: ""
+    hash:
+      value: ""
+      algorithm: ""
+  source_artifact:
+    url: ""
+    hash:
+      value: ""
+      algorithm: ""
+  vcs:
+    type: "Git"
+    url: "https://github.com/material-components/material-components-ios.git"
+    revision: "v124.2.0"
+    path: ""
+  vcs_processed:
+    type: "Git"
+    url: "https://github.com/material-components/material-components-ios.git"
+    revision: "v124.2.0"
+    path: ""
+- id: "Pod::MaterialComponents/Availability:124.2.0"
+  purl: "pkg:pod/MaterialComponents%2FAvailability@124.2.0"
+  declared_licenses:
+  - "Apache 2.0"
+  declared_licenses_processed:
+    spdx_expression: "Apache-2.0"
+    mapped:
+      Apache 2.0: "Apache-2.0"
+  description: "A collection of stand-alone production-ready UI libraries focused\
+    \ on design details."
+  homepage_url: "https://github.com/material-components/material-components-ios"
+  binary_artifact:
+    url: ""
+    hash:
+      value: ""
+      algorithm: ""
+  source_artifact:
+    url: ""
+    hash:
+      value: ""
+      algorithm: ""
+  vcs:
+    type: "Git"
+    url: "https://github.com/material-components/material-components-ios.git"
+    revision: "v124.2.0"
+    path: ""
+  vcs_processed:
+    type: "Git"
+    url: "https://github.com/material-components/material-components-ios.git"
+    revision: "v124.2.0"
+    path: ""
+- id: "Pod::MaterialComponents/Buttons:124.2.0"
+  purl: "pkg:pod/MaterialComponents%2FButtons@124.2.0"
+  declared_licenses:
+  - "Apache 2.0"
+  declared_licenses_processed:
+    spdx_expression: "Apache-2.0"
+    mapped:
+      Apache 2.0: "Apache-2.0"
+  description: "A collection of stand-alone production-ready UI libraries focused\
+    \ on design details."
+  homepage_url: "https://github.com/material-components/material-components-ios"
+  binary_artifact:
+    url: ""
+    hash:
+      value: ""
+      algorithm: ""
+  source_artifact:
+    url: ""
+    hash:
+      value: ""
+      algorithm: ""
+  vcs:
+    type: "Git"
+    url: "https://github.com/material-components/material-components-ios.git"
+    revision: "v124.2.0"
+    path: ""
+  vcs_processed:
+    type: "Git"
+    url: "https://github.com/material-components/material-components-ios.git"
+    revision: "v124.2.0"
+    path: ""
+- id: "Pod::MaterialComponents/Elevation:124.2.0"
+  purl: "pkg:pod/MaterialComponents%2FElevation@124.2.0"
+  declared_licenses:
+  - "Apache 2.0"
+  declared_licenses_processed:
+    spdx_expression: "Apache-2.0"
+    mapped:
+      Apache 2.0: "Apache-2.0"
+  description: "A collection of stand-alone production-ready UI libraries focused\
+    \ on design details."
+  homepage_url: "https://github.com/material-components/material-components-ios"
+  binary_artifact:
+    url: ""
+    hash:
+      value: ""
+      algorithm: ""
+  source_artifact:
+    url: ""
+    hash:
+      value: ""
+      algorithm: ""
+  vcs:
+    type: "Git"
+    url: "https://github.com/material-components/material-components-ios.git"
+    revision: "v124.2.0"
+    path: ""
+  vcs_processed:
+    type: "Git"
+    url: "https://github.com/material-components/material-components-ios.git"
+    revision: "v124.2.0"
+    path: ""
+- id: "Pod::MaterialComponents/Ink:124.2.0"
+  purl: "pkg:pod/MaterialComponents%2FInk@124.2.0"
+  declared_licenses:
+  - "Apache 2.0"
+  declared_licenses_processed:
+    spdx_expression: "Apache-2.0"
+    mapped:
+      Apache 2.0: "Apache-2.0"
+  description: "A collection of stand-alone production-ready UI libraries focused\
+    \ on design details."
+  homepage_url: "https://github.com/material-components/material-components-ios"
+  binary_artifact:
+    url: ""
+    hash:
+      value: ""
+      algorithm: ""
+  source_artifact:
+    url: ""
+    hash:
+      value: ""
+      algorithm: ""
+  vcs:
+    type: "Git"
+    url: "https://github.com/material-components/material-components-ios.git"
+    revision: "v124.2.0"
+    path: ""
+  vcs_processed:
+    type: "Git"
+    url: "https://github.com/material-components/material-components-ios.git"
+    revision: "v124.2.0"
+    path: ""
+- id: "Pod::MaterialComponents/Palettes:124.2.0"
+  purl: "pkg:pod/MaterialComponents%2FPalettes@124.2.0"
+  declared_licenses:
+  - "Apache 2.0"
+  declared_licenses_processed:
+    spdx_expression: "Apache-2.0"
+    mapped:
+      Apache 2.0: "Apache-2.0"
+  description: "A collection of stand-alone production-ready UI libraries focused\
+    \ on design details."
+  homepage_url: "https://github.com/material-components/material-components-ios"
+  binary_artifact:
+    url: ""
+    hash:
+      value: ""
+      algorithm: ""
+  source_artifact:
+    url: ""
+    hash:
+      value: ""
+      algorithm: ""
+  vcs:
+    type: "Git"
+    url: "https://github.com/material-components/material-components-ios.git"
+    revision: "v124.2.0"
+    path: ""
+  vcs_processed:
+    type: "Git"
+    url: "https://github.com/material-components/material-components-ios.git"
+    revision: "v124.2.0"
+    path: ""
+- id: "Pod::MaterialComponents/Ripple:124.2.0"
+  purl: "pkg:pod/MaterialComponents%2FRipple@124.2.0"
+  declared_licenses:
+  - "Apache 2.0"
+  declared_licenses_processed:
+    spdx_expression: "Apache-2.0"
+    mapped:
+      Apache 2.0: "Apache-2.0"
+  description: "A collection of stand-alone production-ready UI libraries focused\
+    \ on design details."
+  homepage_url: "https://github.com/material-components/material-components-ios"
+  binary_artifact:
+    url: ""
+    hash:
+      value: ""
+      algorithm: ""
+  source_artifact:
+    url: ""
+    hash:
+      value: ""
+      algorithm: ""
+  vcs:
+    type: "Git"
+    url: "https://github.com/material-components/material-components-ios.git"
+    revision: "v124.2.0"
+    path: ""
+  vcs_processed:
+    type: "Git"
+    url: "https://github.com/material-components/material-components-ios.git"
+    revision: "v124.2.0"
+    path: ""
+- id: "Pod::MaterialComponents/Shadow:124.2.0"
+  purl: "pkg:pod/MaterialComponents%2FShadow@124.2.0"
+  declared_licenses:
+  - "Apache 2.0"
+  declared_licenses_processed:
+    spdx_expression: "Apache-2.0"
+    mapped:
+      Apache 2.0: "Apache-2.0"
+  description: "A collection of stand-alone production-ready UI libraries focused\
+    \ on design details."
+  homepage_url: "https://github.com/material-components/material-components-ios"
+  binary_artifact:
+    url: ""
+    hash:
+      value: ""
+      algorithm: ""
+  source_artifact:
+    url: ""
+    hash:
+      value: ""
+      algorithm: ""
+  vcs:
+    type: "Git"
+    url: "https://github.com/material-components/material-components-ios.git"
+    revision: "v124.2.0"
+    path: ""
+  vcs_processed:
+    type: "Git"
+    url: "https://github.com/material-components/material-components-ios.git"
+    revision: "v124.2.0"
+    path: ""
+- id: "Pod::MaterialComponents/ShadowElevations:124.2.0"
+  purl: "pkg:pod/MaterialComponents%2FShadowElevations@124.2.0"
+  declared_licenses:
+  - "Apache 2.0"
+  declared_licenses_processed:
+    spdx_expression: "Apache-2.0"
+    mapped:
+      Apache 2.0: "Apache-2.0"
+  description: "A collection of stand-alone production-ready UI libraries focused\
+    \ on design details."
+  homepage_url: "https://github.com/material-components/material-components-ios"
+  binary_artifact:
+    url: ""
+    hash:
+      value: ""
+      algorithm: ""
+  source_artifact:
+    url: ""
+    hash:
+      value: ""
+      algorithm: ""
+  vcs:
+    type: "Git"
+    url: "https://github.com/material-components/material-components-ios.git"
+    revision: "v124.2.0"
+    path: ""
+  vcs_processed:
+    type: "Git"
+    url: "https://github.com/material-components/material-components-ios.git"
+    revision: "v124.2.0"
+    path: ""
+- id: "Pod::MaterialComponents/ShadowLayer:124.2.0"
+  purl: "pkg:pod/MaterialComponents%2FShadowLayer@124.2.0"
+  declared_licenses:
+  - "Apache 2.0"
+  declared_licenses_processed:
+    spdx_expression: "Apache-2.0"
+    mapped:
+      Apache 2.0: "Apache-2.0"
+  description: "A collection of stand-alone production-ready UI libraries focused\
+    \ on design details."
+  homepage_url: "https://github.com/material-components/material-components-ios"
+  binary_artifact:
+    url: ""
+    hash:
+      value: ""
+      algorithm: ""
+  source_artifact:
+    url: ""
+    hash:
+      value: ""
+      algorithm: ""
+  vcs:
+    type: "Git"
+    url: "https://github.com/material-components/material-components-ios.git"
+    revision: "v124.2.0"
+    path: ""
+  vcs_processed:
+    type: "Git"
+    url: "https://github.com/material-components/material-components-ios.git"
+    revision: "v124.2.0"
+    path: ""
+- id: "Pod::MaterialComponents/ShapeLibrary:124.2.0"
+  purl: "pkg:pod/MaterialComponents%2FShapeLibrary@124.2.0"
+  declared_licenses:
+  - "Apache 2.0"
+  declared_licenses_processed:
+    spdx_expression: "Apache-2.0"
+    mapped:
+      Apache 2.0: "Apache-2.0"
+  description: "A collection of stand-alone production-ready UI libraries focused\
+    \ on design details."
+  homepage_url: "https://github.com/material-components/material-components-ios"
+  binary_artifact:
+    url: ""
+    hash:
+      value: ""
+      algorithm: ""
+  source_artifact:
+    url: ""
+    hash:
+      value: ""
+      algorithm: ""
+  vcs:
+    type: "Git"
+    url: "https://github.com/material-components/material-components-ios.git"
+    revision: "v124.2.0"
+    path: ""
+  vcs_processed:
+    type: "Git"
+    url: "https://github.com/material-components/material-components-ios.git"
+    revision: "v124.2.0"
+    path: ""
+- id: "Pod::MaterialComponents/Shapes:124.2.0"
+  purl: "pkg:pod/MaterialComponents%2FShapes@124.2.0"
+  declared_licenses:
+  - "Apache 2.0"
+  declared_licenses_processed:
+    spdx_expression: "Apache-2.0"
+    mapped:
+      Apache 2.0: "Apache-2.0"
+  description: "A collection of stand-alone production-ready UI libraries focused\
+    \ on design details."
+  homepage_url: "https://github.com/material-components/material-components-ios"
+  binary_artifact:
+    url: ""
+    hash:
+      value: ""
+      algorithm: ""
+  source_artifact:
+    url: ""
+    hash:
+      value: ""
+      algorithm: ""
+  vcs:
+    type: "Git"
+    url: "https://github.com/material-components/material-components-ios.git"
+    revision: "v124.2.0"
+    path: ""
+  vcs_processed:
+    type: "Git"
+    url: "https://github.com/material-components/material-components-ios.git"
+    revision: "v124.2.0"
+    path: ""
+- id: "Pod::MaterialComponents/TextFields:124.2.0"
+  purl: "pkg:pod/MaterialComponents%2FTextFields@124.2.0"
+  declared_licenses:
+  - "Apache 2.0"
+  declared_licenses_processed:
+    spdx_expression: "Apache-2.0"
+    mapped:
+      Apache 2.0: "Apache-2.0"
+  description: "A collection of stand-alone production-ready UI libraries focused\
+    \ on design details."
+  homepage_url: "https://github.com/material-components/material-components-ios"
+  binary_artifact:
+    url: ""
+    hash:
+      value: ""
+      algorithm: ""
+  source_artifact:
+    url: ""
+    hash:
+      value: ""
+      algorithm: ""
+  vcs:
+    type: "Git"
+    url: "https://github.com/material-components/material-components-ios.git"
+    revision: "v124.2.0"
+    path: ""
+  vcs_processed:
+    type: "Git"
+    url: "https://github.com/material-components/material-components-ios.git"
+    revision: "v124.2.0"
+    path: ""
+- id: "Pod::MaterialComponents/Typography:124.2.0"
+  purl: "pkg:pod/MaterialComponents%2FTypography@124.2.0"
+  declared_licenses:
+  - "Apache 2.0"
+  declared_licenses_processed:
+    spdx_expression: "Apache-2.0"
+    mapped:
+      Apache 2.0: "Apache-2.0"
+  description: "A collection of stand-alone production-ready UI libraries focused\
+    \ on design details."
+  homepage_url: "https://github.com/material-components/material-components-ios"
+  binary_artifact:
+    url: ""
+    hash:
+      value: ""
+      algorithm: ""
+  source_artifact:
+    url: ""
+    hash:
+      value: ""
+      algorithm: ""
+  vcs:
+    type: "Git"
+    url: "https://github.com/material-components/material-components-ios.git"
+    revision: "v124.2.0"
+    path: ""
+  vcs_processed:
+    type: "Git"
+    url: "https://github.com/material-components/material-components-ios.git"
+    revision: "v124.2.0"
+    path: ""
+- id: "Pod::MaterialComponents/private/Application:124.2.0"
+  purl: "pkg:pod/MaterialComponents%2Fprivate%2FApplication@124.2.0"
+  declared_licenses:
+  - "Apache 2.0"
+  declared_licenses_processed:
+    spdx_expression: "Apache-2.0"
+    mapped:
+      Apache 2.0: "Apache-2.0"
+  description: "A collection of stand-alone production-ready UI libraries focused\
+    \ on design details."
+  homepage_url: "https://github.com/material-components/material-components-ios"
+  binary_artifact:
+    url: ""
+    hash:
+      value: ""
+      algorithm: ""
+  source_artifact:
+    url: ""
+    hash:
+      value: ""
+      algorithm: ""
+  vcs:
+    type: "Git"
+    url: "https://github.com/material-components/material-components-ios.git"
+    revision: "v124.2.0"
+    path: ""
+  vcs_processed:
+    type: "Git"
+    url: "https://github.com/material-components/material-components-ios.git"
+    revision: "v124.2.0"
+    path: ""
+- id: "Pod::MaterialComponents/private/Color:124.2.0"
+  purl: "pkg:pod/MaterialComponents%2Fprivate%2FColor@124.2.0"
+  declared_licenses:
+  - "Apache 2.0"
+  declared_licenses_processed:
+    spdx_expression: "Apache-2.0"
+    mapped:
+      Apache 2.0: "Apache-2.0"
+  description: "A collection of stand-alone production-ready UI libraries focused\
+    \ on design details."
+  homepage_url: "https://github.com/material-components/material-components-ios"
+  binary_artifact:
+    url: ""
+    hash:
+      value: ""
+      algorithm: ""
+  source_artifact:
+    url: ""
+    hash:
+      value: ""
+      algorithm: ""
+  vcs:
+    type: "Git"
+    url: "https://github.com/material-components/material-components-ios.git"
+    revision: "v124.2.0"
+    path: ""
+  vcs_processed:
+    type: "Git"
+    url: "https://github.com/material-components/material-components-ios.git"
+    revision: "v124.2.0"
+    path: ""
+- id: "Pod::MaterialComponents/private/Math:124.2.0"
+  purl: "pkg:pod/MaterialComponents%2Fprivate%2FMath@124.2.0"
+  declared_licenses:
+  - "Apache 2.0"
+  declared_licenses_processed:
+    spdx_expression: "Apache-2.0"
+    mapped:
+      Apache 2.0: "Apache-2.0"
+  description: "A collection of stand-alone production-ready UI libraries focused\
+    \ on design details."
+  homepage_url: "https://github.com/material-components/material-components-ios"
+  binary_artifact:
+    url: ""
+    hash:
+      value: ""
+      algorithm: ""
+  source_artifact:
+    url: ""
+    hash:
+      value: ""
+      algorithm: ""
+  vcs:
+    type: "Git"
+    url: "https://github.com/material-components/material-components-ios.git"
+    revision: "v124.2.0"
+    path: ""
+  vcs_processed:
+    type: "Git"
+    url: "https://github.com/material-components/material-components-ios.git"
+    revision: "v124.2.0"
+    path: ""
 - id: "Pod::Mocker:2.2.0"
   purl: "pkg:pod/Mocker@2.2.0"
   declared_licenses:
@@ -377,6 +904,62 @@ packages:
     path: ""
 - id: "Pod::PhoneNumberKit:3.3.3"
   purl: "pkg:pod/PhoneNumberKit@3.3.3"
+  declared_licenses:
+  - "MIT"
+  declared_licenses_processed:
+    spdx_expression: "MIT"
+  description: "Swift framework for working with phone numbers"
+  homepage_url: "https://github.com/marmelroy/PhoneNumberKit"
+  binary_artifact:
+    url: ""
+    hash:
+      value: ""
+      algorithm: ""
+  source_artifact:
+    url: ""
+    hash:
+      value: ""
+      algorithm: ""
+  vcs:
+    type: "Git"
+    url: "https://github.com/marmelroy/PhoneNumberKit.git"
+    revision: "3.3.3"
+    path: ""
+  vcs_processed:
+    type: "Git"
+    url: "https://github.com/marmelroy/PhoneNumberKit.git"
+    revision: "3.3.3"
+    path: ""
+- id: "Pod::PhoneNumberKit/PhoneNumberKitCore:3.3.3"
+  purl: "pkg:pod/PhoneNumberKit%2FPhoneNumberKitCore@3.3.3"
+  declared_licenses:
+  - "MIT"
+  declared_licenses_processed:
+    spdx_expression: "MIT"
+  description: "Swift framework for working with phone numbers"
+  homepage_url: "https://github.com/marmelroy/PhoneNumberKit"
+  binary_artifact:
+    url: ""
+    hash:
+      value: ""
+      algorithm: ""
+  source_artifact:
+    url: ""
+    hash:
+      value: ""
+      algorithm: ""
+  vcs:
+    type: "Git"
+    url: "https://github.com/marmelroy/PhoneNumberKit.git"
+    revision: "3.3.3"
+    path: ""
+  vcs_processed:
+    type: "Git"
+    url: "https://github.com/marmelroy/PhoneNumberKit.git"
+    revision: "3.3.3"
+    path: ""
+- id: "Pod::PhoneNumberKit/UIKit:3.3.3"
+  purl: "pkg:pod/PhoneNumberKit%2FUIKit@3.3.3"
   declared_licenses:
   - "MIT"
   declared_licenses_processed:
@@ -515,587 +1098,4 @@ packages:
     type: "Git"
     url: "https://github.com/charterhouse/base64url-swift.git"
     revision: "1.1.0"
-    path: ""
-- id: "Pod:MaterialComponents:AnimationTiming:124.2.0"
-  purl: "pkg:pod/MaterialComponents/AnimationTiming@124.2.0"
-  declared_licenses:
-  - "Apache 2.0"
-  declared_licenses_processed:
-    spdx_expression: "Apache-2.0"
-    mapped:
-      Apache 2.0: "Apache-2.0"
-  description: "A collection of stand-alone production-ready UI libraries focused\
-    \ on design details."
-  homepage_url: "https://github.com/material-components/material-components-ios"
-  binary_artifact:
-    url: ""
-    hash:
-      value: ""
-      algorithm: ""
-  source_artifact:
-    url: ""
-    hash:
-      value: ""
-      algorithm: ""
-  vcs:
-    type: "Git"
-    url: "https://github.com/material-components/material-components-ios.git"
-    revision: "v124.2.0"
-    path: ""
-  vcs_processed:
-    type: "Git"
-    url: "https://github.com/material-components/material-components-ios.git"
-    revision: "v124.2.0"
-    path: ""
-- id: "Pod:MaterialComponents:Availability:124.2.0"
-  purl: "pkg:pod/MaterialComponents/Availability@124.2.0"
-  declared_licenses:
-  - "Apache 2.0"
-  declared_licenses_processed:
-    spdx_expression: "Apache-2.0"
-    mapped:
-      Apache 2.0: "Apache-2.0"
-  description: "A collection of stand-alone production-ready UI libraries focused\
-    \ on design details."
-  homepage_url: "https://github.com/material-components/material-components-ios"
-  binary_artifact:
-    url: ""
-    hash:
-      value: ""
-      algorithm: ""
-  source_artifact:
-    url: ""
-    hash:
-      value: ""
-      algorithm: ""
-  vcs:
-    type: "Git"
-    url: "https://github.com/material-components/material-components-ios.git"
-    revision: "v124.2.0"
-    path: ""
-  vcs_processed:
-    type: "Git"
-    url: "https://github.com/material-components/material-components-ios.git"
-    revision: "v124.2.0"
-    path: ""
-- id: "Pod:MaterialComponents:Buttons:124.2.0"
-  purl: "pkg:pod/MaterialComponents/Buttons@124.2.0"
-  declared_licenses:
-  - "Apache 2.0"
-  declared_licenses_processed:
-    spdx_expression: "Apache-2.0"
-    mapped:
-      Apache 2.0: "Apache-2.0"
-  description: "A collection of stand-alone production-ready UI libraries focused\
-    \ on design details."
-  homepage_url: "https://github.com/material-components/material-components-ios"
-  binary_artifact:
-    url: ""
-    hash:
-      value: ""
-      algorithm: ""
-  source_artifact:
-    url: ""
-    hash:
-      value: ""
-      algorithm: ""
-  vcs:
-    type: "Git"
-    url: "https://github.com/material-components/material-components-ios.git"
-    revision: "v124.2.0"
-    path: ""
-  vcs_processed:
-    type: "Git"
-    url: "https://github.com/material-components/material-components-ios.git"
-    revision: "v124.2.0"
-    path: ""
-- id: "Pod:MaterialComponents:Elevation:124.2.0"
-  purl: "pkg:pod/MaterialComponents/Elevation@124.2.0"
-  declared_licenses:
-  - "Apache 2.0"
-  declared_licenses_processed:
-    spdx_expression: "Apache-2.0"
-    mapped:
-      Apache 2.0: "Apache-2.0"
-  description: "A collection of stand-alone production-ready UI libraries focused\
-    \ on design details."
-  homepage_url: "https://github.com/material-components/material-components-ios"
-  binary_artifact:
-    url: ""
-    hash:
-      value: ""
-      algorithm: ""
-  source_artifact:
-    url: ""
-    hash:
-      value: ""
-      algorithm: ""
-  vcs:
-    type: "Git"
-    url: "https://github.com/material-components/material-components-ios.git"
-    revision: "v124.2.0"
-    path: ""
-  vcs_processed:
-    type: "Git"
-    url: "https://github.com/material-components/material-components-ios.git"
-    revision: "v124.2.0"
-    path: ""
-- id: "Pod:MaterialComponents:Ink:124.2.0"
-  purl: "pkg:pod/MaterialComponents/Ink@124.2.0"
-  declared_licenses:
-  - "Apache 2.0"
-  declared_licenses_processed:
-    spdx_expression: "Apache-2.0"
-    mapped:
-      Apache 2.0: "Apache-2.0"
-  description: "A collection of stand-alone production-ready UI libraries focused\
-    \ on design details."
-  homepage_url: "https://github.com/material-components/material-components-ios"
-  binary_artifact:
-    url: ""
-    hash:
-      value: ""
-      algorithm: ""
-  source_artifact:
-    url: ""
-    hash:
-      value: ""
-      algorithm: ""
-  vcs:
-    type: "Git"
-    url: "https://github.com/material-components/material-components-ios.git"
-    revision: "v124.2.0"
-    path: ""
-  vcs_processed:
-    type: "Git"
-    url: "https://github.com/material-components/material-components-ios.git"
-    revision: "v124.2.0"
-    path: ""
-- id: "Pod:MaterialComponents:Palettes:124.2.0"
-  purl: "pkg:pod/MaterialComponents/Palettes@124.2.0"
-  declared_licenses:
-  - "Apache 2.0"
-  declared_licenses_processed:
-    spdx_expression: "Apache-2.0"
-    mapped:
-      Apache 2.0: "Apache-2.0"
-  description: "A collection of stand-alone production-ready UI libraries focused\
-    \ on design details."
-  homepage_url: "https://github.com/material-components/material-components-ios"
-  binary_artifact:
-    url: ""
-    hash:
-      value: ""
-      algorithm: ""
-  source_artifact:
-    url: ""
-    hash:
-      value: ""
-      algorithm: ""
-  vcs:
-    type: "Git"
-    url: "https://github.com/material-components/material-components-ios.git"
-    revision: "v124.2.0"
-    path: ""
-  vcs_processed:
-    type: "Git"
-    url: "https://github.com/material-components/material-components-ios.git"
-    revision: "v124.2.0"
-    path: ""
-- id: "Pod:MaterialComponents:Ripple:124.2.0"
-  purl: "pkg:pod/MaterialComponents/Ripple@124.2.0"
-  declared_licenses:
-  - "Apache 2.0"
-  declared_licenses_processed:
-    spdx_expression: "Apache-2.0"
-    mapped:
-      Apache 2.0: "Apache-2.0"
-  description: "A collection of stand-alone production-ready UI libraries focused\
-    \ on design details."
-  homepage_url: "https://github.com/material-components/material-components-ios"
-  binary_artifact:
-    url: ""
-    hash:
-      value: ""
-      algorithm: ""
-  source_artifact:
-    url: ""
-    hash:
-      value: ""
-      algorithm: ""
-  vcs:
-    type: "Git"
-    url: "https://github.com/material-components/material-components-ios.git"
-    revision: "v124.2.0"
-    path: ""
-  vcs_processed:
-    type: "Git"
-    url: "https://github.com/material-components/material-components-ios.git"
-    revision: "v124.2.0"
-    path: ""
-- id: "Pod:MaterialComponents:Shadow:124.2.0"
-  purl: "pkg:pod/MaterialComponents/Shadow@124.2.0"
-  declared_licenses:
-  - "Apache 2.0"
-  declared_licenses_processed:
-    spdx_expression: "Apache-2.0"
-    mapped:
-      Apache 2.0: "Apache-2.0"
-  description: "A collection of stand-alone production-ready UI libraries focused\
-    \ on design details."
-  homepage_url: "https://github.com/material-components/material-components-ios"
-  binary_artifact:
-    url: ""
-    hash:
-      value: ""
-      algorithm: ""
-  source_artifact:
-    url: ""
-    hash:
-      value: ""
-      algorithm: ""
-  vcs:
-    type: "Git"
-    url: "https://github.com/material-components/material-components-ios.git"
-    revision: "v124.2.0"
-    path: ""
-  vcs_processed:
-    type: "Git"
-    url: "https://github.com/material-components/material-components-ios.git"
-    revision: "v124.2.0"
-    path: ""
-- id: "Pod:MaterialComponents:ShadowElevations:124.2.0"
-  purl: "pkg:pod/MaterialComponents/ShadowElevations@124.2.0"
-  declared_licenses:
-  - "Apache 2.0"
-  declared_licenses_processed:
-    spdx_expression: "Apache-2.0"
-    mapped:
-      Apache 2.0: "Apache-2.0"
-  description: "A collection of stand-alone production-ready UI libraries focused\
-    \ on design details."
-  homepage_url: "https://github.com/material-components/material-components-ios"
-  binary_artifact:
-    url: ""
-    hash:
-      value: ""
-      algorithm: ""
-  source_artifact:
-    url: ""
-    hash:
-      value: ""
-      algorithm: ""
-  vcs:
-    type: "Git"
-    url: "https://github.com/material-components/material-components-ios.git"
-    revision: "v124.2.0"
-    path: ""
-  vcs_processed:
-    type: "Git"
-    url: "https://github.com/material-components/material-components-ios.git"
-    revision: "v124.2.0"
-    path: ""
-- id: "Pod:MaterialComponents:ShadowLayer:124.2.0"
-  purl: "pkg:pod/MaterialComponents/ShadowLayer@124.2.0"
-  declared_licenses:
-  - "Apache 2.0"
-  declared_licenses_processed:
-    spdx_expression: "Apache-2.0"
-    mapped:
-      Apache 2.0: "Apache-2.0"
-  description: "A collection of stand-alone production-ready UI libraries focused\
-    \ on design details."
-  homepage_url: "https://github.com/material-components/material-components-ios"
-  binary_artifact:
-    url: ""
-    hash:
-      value: ""
-      algorithm: ""
-  source_artifact:
-    url: ""
-    hash:
-      value: ""
-      algorithm: ""
-  vcs:
-    type: "Git"
-    url: "https://github.com/material-components/material-components-ios.git"
-    revision: "v124.2.0"
-    path: ""
-  vcs_processed:
-    type: "Git"
-    url: "https://github.com/material-components/material-components-ios.git"
-    revision: "v124.2.0"
-    path: ""
-- id: "Pod:MaterialComponents:ShapeLibrary:124.2.0"
-  purl: "pkg:pod/MaterialComponents/ShapeLibrary@124.2.0"
-  declared_licenses:
-  - "Apache 2.0"
-  declared_licenses_processed:
-    spdx_expression: "Apache-2.0"
-    mapped:
-      Apache 2.0: "Apache-2.0"
-  description: "A collection of stand-alone production-ready UI libraries focused\
-    \ on design details."
-  homepage_url: "https://github.com/material-components/material-components-ios"
-  binary_artifact:
-    url: ""
-    hash:
-      value: ""
-      algorithm: ""
-  source_artifact:
-    url: ""
-    hash:
-      value: ""
-      algorithm: ""
-  vcs:
-    type: "Git"
-    url: "https://github.com/material-components/material-components-ios.git"
-    revision: "v124.2.0"
-    path: ""
-  vcs_processed:
-    type: "Git"
-    url: "https://github.com/material-components/material-components-ios.git"
-    revision: "v124.2.0"
-    path: ""
-- id: "Pod:MaterialComponents:Shapes:124.2.0"
-  purl: "pkg:pod/MaterialComponents/Shapes@124.2.0"
-  declared_licenses:
-  - "Apache 2.0"
-  declared_licenses_processed:
-    spdx_expression: "Apache-2.0"
-    mapped:
-      Apache 2.0: "Apache-2.0"
-  description: "A collection of stand-alone production-ready UI libraries focused\
-    \ on design details."
-  homepage_url: "https://github.com/material-components/material-components-ios"
-  binary_artifact:
-    url: ""
-    hash:
-      value: ""
-      algorithm: ""
-  source_artifact:
-    url: ""
-    hash:
-      value: ""
-      algorithm: ""
-  vcs:
-    type: "Git"
-    url: "https://github.com/material-components/material-components-ios.git"
-    revision: "v124.2.0"
-    path: ""
-  vcs_processed:
-    type: "Git"
-    url: "https://github.com/material-components/material-components-ios.git"
-    revision: "v124.2.0"
-    path: ""
-- id: "Pod:MaterialComponents:TextFields:124.2.0"
-  purl: "pkg:pod/MaterialComponents/TextFields@124.2.0"
-  declared_licenses:
-  - "Apache 2.0"
-  declared_licenses_processed:
-    spdx_expression: "Apache-2.0"
-    mapped:
-      Apache 2.0: "Apache-2.0"
-  description: "A collection of stand-alone production-ready UI libraries focused\
-    \ on design details."
-  homepage_url: "https://github.com/material-components/material-components-ios"
-  binary_artifact:
-    url: ""
-    hash:
-      value: ""
-      algorithm: ""
-  source_artifact:
-    url: ""
-    hash:
-      value: ""
-      algorithm: ""
-  vcs:
-    type: "Git"
-    url: "https://github.com/material-components/material-components-ios.git"
-    revision: "v124.2.0"
-    path: ""
-  vcs_processed:
-    type: "Git"
-    url: "https://github.com/material-components/material-components-ios.git"
-    revision: "v124.2.0"
-    path: ""
-- id: "Pod:MaterialComponents:Typography:124.2.0"
-  purl: "pkg:pod/MaterialComponents/Typography@124.2.0"
-  declared_licenses:
-  - "Apache 2.0"
-  declared_licenses_processed:
-    spdx_expression: "Apache-2.0"
-    mapped:
-      Apache 2.0: "Apache-2.0"
-  description: "A collection of stand-alone production-ready UI libraries focused\
-    \ on design details."
-  homepage_url: "https://github.com/material-components/material-components-ios"
-  binary_artifact:
-    url: ""
-    hash:
-      value: ""
-      algorithm: ""
-  source_artifact:
-    url: ""
-    hash:
-      value: ""
-      algorithm: ""
-  vcs:
-    type: "Git"
-    url: "https://github.com/material-components/material-components-ios.git"
-    revision: "v124.2.0"
-    path: ""
-  vcs_processed:
-    type: "Git"
-    url: "https://github.com/material-components/material-components-ios.git"
-    revision: "v124.2.0"
-    path: ""
-- id: "Pod:MaterialComponents:private/Application:124.2.0"
-  purl: "pkg:pod/MaterialComponents/private%2FApplication@124.2.0"
-  declared_licenses:
-  - "Apache 2.0"
-  declared_licenses_processed:
-    spdx_expression: "Apache-2.0"
-    mapped:
-      Apache 2.0: "Apache-2.0"
-  description: "A collection of stand-alone production-ready UI libraries focused\
-    \ on design details."
-  homepage_url: "https://github.com/material-components/material-components-ios"
-  binary_artifact:
-    url: ""
-    hash:
-      value: ""
-      algorithm: ""
-  source_artifact:
-    url: ""
-    hash:
-      value: ""
-      algorithm: ""
-  vcs:
-    type: "Git"
-    url: "https://github.com/material-components/material-components-ios.git"
-    revision: "v124.2.0"
-    path: ""
-  vcs_processed:
-    type: "Git"
-    url: "https://github.com/material-components/material-components-ios.git"
-    revision: "v124.2.0"
-    path: ""
-- id: "Pod:MaterialComponents:private/Color:124.2.0"
-  purl: "pkg:pod/MaterialComponents/private%2FColor@124.2.0"
-  declared_licenses:
-  - "Apache 2.0"
-  declared_licenses_processed:
-    spdx_expression: "Apache-2.0"
-    mapped:
-      Apache 2.0: "Apache-2.0"
-  description: "A collection of stand-alone production-ready UI libraries focused\
-    \ on design details."
-  homepage_url: "https://github.com/material-components/material-components-ios"
-  binary_artifact:
-    url: ""
-    hash:
-      value: ""
-      algorithm: ""
-  source_artifact:
-    url: ""
-    hash:
-      value: ""
-      algorithm: ""
-  vcs:
-    type: "Git"
-    url: "https://github.com/material-components/material-components-ios.git"
-    revision: "v124.2.0"
-    path: ""
-  vcs_processed:
-    type: "Git"
-    url: "https://github.com/material-components/material-components-ios.git"
-    revision: "v124.2.0"
-    path: ""
-- id: "Pod:MaterialComponents:private/Math:124.2.0"
-  purl: "pkg:pod/MaterialComponents/private%2FMath@124.2.0"
-  declared_licenses:
-  - "Apache 2.0"
-  declared_licenses_processed:
-    spdx_expression: "Apache-2.0"
-    mapped:
-      Apache 2.0: "Apache-2.0"
-  description: "A collection of stand-alone production-ready UI libraries focused\
-    \ on design details."
-  homepage_url: "https://github.com/material-components/material-components-ios"
-  binary_artifact:
-    url: ""
-    hash:
-      value: ""
-      algorithm: ""
-  source_artifact:
-    url: ""
-    hash:
-      value: ""
-      algorithm: ""
-  vcs:
-    type: "Git"
-    url: "https://github.com/material-components/material-components-ios.git"
-    revision: "v124.2.0"
-    path: ""
-  vcs_processed:
-    type: "Git"
-    url: "https://github.com/material-components/material-components-ios.git"
-    revision: "v124.2.0"
-    path: ""
-- id: "Pod:PhoneNumberKit:PhoneNumberKitCore:3.3.3"
-  purl: "pkg:pod/PhoneNumberKit/PhoneNumberKitCore@3.3.3"
-  declared_licenses:
-  - "MIT"
-  declared_licenses_processed:
-    spdx_expression: "MIT"
-  description: "Swift framework for working with phone numbers"
-  homepage_url: "https://github.com/marmelroy/PhoneNumberKit"
-  binary_artifact:
-    url: ""
-    hash:
-      value: ""
-      algorithm: ""
-  source_artifact:
-    url: ""
-    hash:
-      value: ""
-      algorithm: ""
-  vcs:
-    type: "Git"
-    url: "https://github.com/marmelroy/PhoneNumberKit.git"
-    revision: "3.3.3"
-    path: ""
-  vcs_processed:
-    type: "Git"
-    url: "https://github.com/marmelroy/PhoneNumberKit.git"
-    revision: "3.3.3"
-    path: ""
-- id: "Pod:PhoneNumberKit:UIKit:3.3.3"
-  purl: "pkg:pod/PhoneNumberKit/UIKit@3.3.3"
-  declared_licenses:
-  - "MIT"
-  declared_licenses_processed:
-    spdx_expression: "MIT"
-  description: "Swift framework for working with phone numbers"
-  homepage_url: "https://github.com/marmelroy/PhoneNumberKit"
-  binary_artifact:
-    url: ""
-    hash:
-      value: ""
-      algorithm: ""
-  source_artifact:
-    url: ""
-    hash:
-      value: ""
-      algorithm: ""
-  vcs:
-    type: "Git"
-    url: "https://github.com/marmelroy/PhoneNumberKit.git"
-    revision: "3.3.3"
-    path: ""
-  vcs_processed:
-    type: "Git"
-    url: "https://github.com/marmelroy/PhoneNumberKit.git"
-    revision: "3.3.3"
     path: ""

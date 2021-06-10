@@ -111,8 +111,8 @@ class CocoaPods(
                 project = Project(
                     id = Identifier(
                         type = managerName,
-                        namespace = projectInfo.namespace.orEmpty(),
-                        name = projectInfo.projectName.orEmpty(),
+                        namespace = "",
+                        name = packageName(projectInfo.namespace, projectInfo.projectName),
                         version = projectInfo.revision.orEmpty()
                     ),
                     definitionFilePath = VersionControlSystem.getPathInfo(definitionFile).path,
@@ -167,7 +167,7 @@ class CocoaPods(
     }
 
     private fun lookupPodspec(id: Identifier, workingDir: File): PodSpec {
-        val namespaceOrName = id.namespace.ifEmpty { id.name }
+        val namespaceOrName = id.name.substringBefore("/")
         podSpecCache[namespaceOrName]?.let { return it }
 
         val pathResult = ProcessCapture(command(workingDir),
@@ -225,7 +225,7 @@ data class PodSpec(
     val remoteArtifact: RemoteArtifact,
     var dependencies: Set<PodSpec>
 ) {
-    var identifier: Identifier = Identifier("Pod", namespace.orEmpty(), name, version)
+    var identifier: Identifier = Identifier("Pod", "", packageName(namespace, name), version)
 
     companion object Factory {
         fun createFromJson(spec: String): List<PodSpec> {
@@ -406,7 +406,14 @@ private fun String.toPackageReference(dependencies: SortedSet<PackageReference> 
         name = names.subList(1, names.size).joinToString("/")
     }
 
-    val identifier = Identifier("Pod", namespace.orEmpty(), name, version.orEmpty())
+    val identifier = Identifier("Pod", "", packageName(namespace, name), version.orEmpty())
 
     return PackageReference(identifier, dependencies = dependencies)
 }
+
+private fun packageName(namespace: String?, name: String?): String =
+    if (namespace.isNullOrBlank()) {
+        name.orEmpty()
+    } else {
+        "${namespace.orEmpty()}/${name.orEmpty()}"
+    }
